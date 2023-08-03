@@ -14,45 +14,53 @@ https://onlinephp.io/
 
 """
 
-counter = 0
+import itertools
 
 
-def follow_french_rules(result):
+def apply_french_rules(word):
     """___"""
-    for elem in ["ffy", "fy", "tiond", "tiont"]:
-        if elem in result:
-            return None
-    result = result.replace("èff", "eff")
-    return result
+    if any(elem in word for elem in ["ffy", "fy", "tiond", "tiont"]):
+        word = None
+    else:
+        word.replace("èff", "eff")
+    return word
 
 
-def generate_combinations(phonemes, current_combination=[], index=0):
+def generate_combinations(phonemes):
     """___"""
-    if not index == len(phonemes):
-        for element in phonemes[index]:
-            generate_combinations(phonemes, current_combination + [element], index + 1)
-        return
+    combinations = itertools.product(*phonemes)
+    combinations = ["".join(line) for line in combinations]
+    combinations = [apply_french_rules(line) for line in combinations]
+    combinations = [elem for elem in combinations if elem is not None]
+    return combinations
 
-    result = "".join(current_combination)
-    result = follow_french_rules(result)
-    if result is None:
-        return
 
-    global counter
-    counter += 1
-    print(f"{counter:4d}. {result}")
+def print_results(combinations, phonemes):
+    """___"""
+    count = lambda l: l[0] if len(l) == 1 else l[0] * count(l[1:])
+    for id, combination in enumerate(combinations):
+        print(f"{id+1:4d}. {combination}")
+    print(
+        "Nombre de combinaisons avant application des règles de français :"
+        f" {count([len(row) for row in phonemes])}"
+    )
+    print(
+        "Nombre de combinaisons après application des règles de français :"
+        f" {len(combinations)}"
+    )
 
 
 if __name__ == "__main__":
-    phonemes = [
-        ["k", "c", "ch"],
-        ["r"],
-        ["ai", "è"],
-        ["f", "ff", "ph"],
-        ["i", "y"],
-        ["ss", "c", "t", "sc"],
-        ["i"],
-        ["on", "ond", "ont"],
-    ]
+    phonemes = (
+        ("k", "c", "ch"),
+        ("r"),
+        ("ai", "è"),
+        ("f", "ff", "ph"),
+        ("i", "y"),
+        ("ss", "c", "t", "sc"),
+        ("i"),
+        ("on", "ond", "ont"),
+    )
 
-    generate_combinations(phonemes)
+    combinations = generate_combinations(phonemes)
+    print_results(combinations, phonemes)

@@ -12,6 +12,6 @@ for k in ["k", "c", "ch"]:
                                     if elem in result:
                                         break
                                 else:
-                                    result = result.replace("èff", "eff")
+                                    result.replace("èff", "eff")
                                     counter += 1
                                     print(f"{counter:4d}. {result}")
