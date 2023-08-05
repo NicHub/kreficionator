@@ -126,7 +126,7 @@ def lambda_prod_2(lst):
     """Fail if list is empty."""
     if not (ans := sanity_checks(lst)) is False:
         return ans
-    ans = (lambda lst, j=1: [j := (lambda i: i * j)(i) for i in (lst)][-1])(lst)
+    ans = (lambda lst, j=1: [j := (lambda i: i * j)(i) for i in lst][-1])(lst)
     return ans
 
 
