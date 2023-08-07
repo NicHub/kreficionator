@@ -18,158 +18,99 @@ import numpy as np
 import perfplot
 
 
-def sanity_checks(lst):
-    """___"""
-    return False
-    _l = len(lst)
-    if _l == 0:
-        ans = None
-        return ans
-    elif _l == 1:
-        ans = lst[0]
-        return ans
-    ans = False
-    return ans
-
-
 def mathexp_prod(lst):
-    """Return 1 if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
     ans = math.exp(sum(map(math.log, lst)))
     return ans
 
 
 def reduce_lambda_prod(lst):
-    """Return 1 if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
     ans = reduce(lambda x, y: x * y, lst, 1)
     return ans
 
 
 def reduce_mul_prod(lst):
-    """Return 1 if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
     ans = reduce(mul, lst, 1)
     return ans
 
 
 def forloop_prod(lst):
-    """Return None if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
-    ans = lst[0]
+    ans = lst[0] if len(lst) else 1
     for elem in lst[1:]:
         ans *= elem
     return ans
 
 
 def numpy_prod(lst):
-    """Return 1 if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
     ans = np.prod(lst)
     return ans
 
 
 def math_prod(lst):
-    """Return 1 if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
     ans = math.prod(lst)
     return ans
 
 
 def itertools_accumulate_prod_1(lst):
-    """Fail if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
+    if not len(lst):
+        return 1
     for ans in accumulate(lst, mul):
         pass
     return ans
 
 
 def itertools_accumulate_prod_2(lst):
-    """Fail if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
+    if not len(lst):
+        return 1
     *_, ans = accumulate(lst, mul)
     return ans
 
 
 def while_prod(lst):
-    """Return None if list is empty."""
-    ans = lst[0] if len(lst) else None
+    ans = lst[0] if len(lst) else 1
     i = 1
-    while i < len(lst):
+    imax = len(lst)
+    while i < imax:
         ans *= lst[i]
         i += 1
     return ans
 
 
-def lambda_prod_1(lst):
-    """Fail if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
-    ans = [j := (lambda c, i: i * j if c else i)(c, i) for c, i in enumerate(lst)][-1]
-    return ans
-
-
-def lambda_prod_2(lst):
-    """Fail if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
-    ans = (lambda lst, j=1: [j := (lambda i: i * j)(i) for i in lst][-1])(lst)
-    return ans
-
-
-def lambda_prod_3(lst):
-    """Fail if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
-    ans = (lambda lst, j=1: [j := (lambda i: i * j)(i) for i in lst][-1])(lst)
+def list_comprehension_prod(lst):
+    ans = (lambda lst, j=1: [j := i * j for i in lst][-1])(lst) if len(lst) else 1
     return ans
 
 
 def eval_prod(lst):
-    """Fail if list is empty."""
-    if not (ans := sanity_checks(lst)) is False:
-        return ans
+    if not len(lst):
+        return 1
     ans = eval("*".join(str(item) for item in lst))
     return ans
 
 
 if __name__ == "__main__":
-    exp_max = 4
-    # Increase recursion limit for `eval_prod()` and `lambda_prod_0()` to work.
-    sys.setrecursionlimit(2 * 10**exp_max)
+    exp_max = 5
+    # Increase recursion limit for `eval_prod()` to work.
+    sys.setrecursionlimit(10**exp_max)
     b = perfplot.bench(
         setup=np.random.rand,
         kernels=[
-            lambda_prod_1,
-            lambda_prod_2,
-            lambda_prod_3,
+            eval_prod,
             while_prod,
             reduce_lambda_prod,
+            mathexp_prod,
+            list_comprehension_prod,
             itertools_accumulate_prod_1,
             itertools_accumulate_prod_2,
-            mathexp_prod,
             forloop_prod,
             reduce_mul_prod,
             math_prod,
             numpy_prod,
-            eval_prod,
         ],
-        # n_range=[10**k for k in range(0, exp_max + 1)],
-        # n_range=[i * 2 - 1 for i in range(1, 11)]
-        # + [10**k for k in range(2, exp_max + 1)],
-        n_range=[1] + [i * 2 for i in range(1, 10)] + [i * 10 for i in range(2, 5)],
+        n_range=[10**k for k in range(0, exp_max + 1)],
     )
     b.save(
         "out.png",
-        logx=False,
+        logx=True,
         logy=True,
     )
     # b.show()
