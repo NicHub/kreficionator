@@ -6,6 +6,8 @@ https://stackoverflow.com/a/55297341/3057377
 # Empty product
 https://en.wikipedia.org/wiki/Empty_product
 
+https://www.geeksforgeeks.org/python-multiply-numbers-list-3-different-ways/
+
 """
 
 import math
@@ -33,7 +35,7 @@ def reduce_mul_prod(lst):
     return ans
 
 
-def forloop_prod(lst):
+def for_loop_prod(lst):
     ans = lst[0] if len(lst) else 1
     for elem in lst[1:]:
         ans *= elem
@@ -78,11 +80,11 @@ def itertools_accumulate_prod_1(lst):
 
 
 def itertools_accumulate_prod_2(lst):
-    *_, ans = accumulate(lst, mul) if len(lst) else 1
+    *_, ans = accumulate(lst, mul) if len(lst) else (None, 1)
     return ans
 
 
-def while_prod(lst):
+def while_loop_prod(lst):
     ans = lst[0] if len(lst) else 1
     i = 1
     imax = len(lst)
@@ -92,7 +94,7 @@ def while_prod(lst):
     return ans
 
 
-def list_comprehension_prod(lst):
+def list_comprehension_prod_1(lst):
     ans = (lambda lst, j=1: [j := i * j for i in lst][-1])(lst) if len(lst) else 1
     return ans
 
@@ -109,31 +111,33 @@ def eval_prod(lst):
 
 if __name__ == "__main__":
     exp_max = 5
-    # Increase recursion limit for `eval_prod()` to work.
+    # Increase the recursion limit for `eval_prod()` to work.
     sys.setrecursionlimit(10**exp_max)
-    b = perfplot.bench(
+    pb = perfplot.bench(
         setup=np.random.rand,
         kernels=[
-            # eval_prod,
-            # while_prod,
-            # while_loop_iter_prod,
-            # reduce_lambda_prod,
-            # mathexp_prod,
-            list_comprehension_prod,
+            eval_prod,
+            while_loop_prod,
             list_comprehension_prod_2,
-            # itertools_accumulate_prod_1,
-            # itertools_accumulate_prod_2,
-            forloop_prod,
+            reduce_lambda_prod,
+            while_loop_iter_prod,
+            mathexp_prod,
+            list_comprehension_prod_1,
+            itertools_accumulate_prod_2,
+            itertools_accumulate_prod_1,
             for_loop_iter_prod,
-            # reduce_mul_prod,
-            # math_prod,
-            # numpy_prod,
+            for_loop_prod,
+            reduce_mul_prod,
+            math_prod,
+            numpy_prod,
         ],
-        n_range=[10**k for k in range(0, exp_max + 1)],
+        # n_range=[10**k for k in range(0, exp_max + 1)],
+        n_range=[0, 1, 2, 5, 10],
     )
-    b.save(
+    pb.save(
         "out.png",
-        logx=True,
+        # logx=True,
+        logx=False,
         logy=True,
     )
-    # b.show()
+    # pb.show()

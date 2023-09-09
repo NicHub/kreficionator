@@ -8,10 +8,8 @@ for k in ["k", "c", "ch"]:
                         for i in ["i"]:
                             for on in ["on", "ond", "ont"]:
                                 result = k + r + ai + f + y + s + i + on
-                                for elem in ["ffy", "fy", "tiond", "tiont"]:
-                                    if elem in result:
-                                        break
-                                else:
-                                    result.replace("èff", "eff")
-                                    counter += 1
-                                    print(f"{counter:4d}. {result}")
+                                if any(elem in result for elem in ["ffy", "fy", "tiond", "tiont"]):
+                                    break
+                                result.replace("èff", "eff")
+                                counter += 1
+                                print(f"{counter:4d}. {result}")

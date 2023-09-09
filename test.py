@@ -1,28 +1,51 @@
+# def gen():
+#     x, y = 1, 2
+#     yield (x, y)
+#     x += 1
+#     yield (x, y)
 
 
+# g = gen()
+# print(next(g))
+# print(next(g))
 
 
+# string = "Yashi"
+# # printing the string in reverse order
+# li = list(string[i] for i in range(len(string) - 1, -1, -1))
+# print(li)
 
 
+# def mul(x, y):
+#     yield (x * y)
 
 
+# lst = range(10)
+# ans = 1
+# for id in range(len(lst) - 1):
+#     next()
 
 
+# *_, last = (x * x for x in range(10))
+
+# from itertools import accumulate
+# from operator import mul
+# lst = [1, 4, 5, 6]
+# lst = []
+# ans = 1 / 0 if len(lst) else 1
+# print(ans)
 
 
+# *_, ans = accumulate(lst, mul) if len(lst) else (None, 1)
+# print(ans)
 
-def list_comprehension_prod(lst):
-    ans = (lambda lst, j=1: [j := i * j for i in lst][-1])(lst) if len(lst) else 1
+def for_loop_iter_prod_2(lst):
+    it = iter(lst)
+    ans = next(it, 1)
+    for _ in range(len(it)):
+        print(ans)
+        ans *= next(it)
     return ans
 
-
-lst = [2, 3, 4, 5]
-
-
-def t(lst):
-    ans = [elem * i for i in lst[1:] for elem in [lst[0]]][-1] if len(lst) else 1
-    return ans
-
-
-print(lst)
-print(t(lst))
+lst = [1,2,3,4,6]
+for_loop_iter_prod_2(lst)
