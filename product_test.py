@@ -40,6 +40,25 @@ def forloop_prod(lst):
     return ans
 
 
+def for_loop_iter_prod(lst):
+    it = iter(lst)
+    ans = next(it, 1)
+    for elem in it:
+        ans *= elem
+    return ans
+
+
+def while_loop_iter_prod(lst):
+    it = iter(lst)
+    ans = next(it, 1)
+    while True:
+        elem = next(it, None)
+        if elem is None:
+            break
+        ans *= elem
+    return ans
+
+
 def numpy_prod(lst):
     ans = np.prod(lst)
     return ans
@@ -59,9 +78,7 @@ def itertools_accumulate_prod_1(lst):
 
 
 def itertools_accumulate_prod_2(lst):
-    if not len(lst):
-        return 1
-    *_, ans = accumulate(lst, mul)
+    *_, ans = accumulate(lst, mul) if len(lst) else 1
     return ans
 
 
@@ -80,10 +97,13 @@ def list_comprehension_prod(lst):
     return ans
 
 
+def list_comprehension_prod_2(lst):
+    ans = [(j := (i * j) if c else i) for c, i in enumerate(lst)][-1] if len(lst) else 1
+    return ans
+
+
 def eval_prod(lst):
-    if not len(lst):
-        return 1
-    ans = eval("*".join(str(item) for item in lst))
+    ans = eval("*".join(str(item) for item in lst)) if len(lst) else 1
     return ans
 
 
@@ -94,17 +114,20 @@ if __name__ == "__main__":
     b = perfplot.bench(
         setup=np.random.rand,
         kernels=[
-            eval_prod,
-            while_prod,
-            reduce_lambda_prod,
-            mathexp_prod,
+            # eval_prod,
+            # while_prod,
+            # while_loop_iter_prod,
+            # reduce_lambda_prod,
+            # mathexp_prod,
             list_comprehension_prod,
-            itertools_accumulate_prod_1,
-            itertools_accumulate_prod_2,
+            list_comprehension_prod_2,
+            # itertools_accumulate_prod_1,
+            # itertools_accumulate_prod_2,
             forloop_prod,
-            reduce_mul_prod,
-            math_prod,
-            numpy_prod,
+            for_loop_iter_prod,
+            # reduce_mul_prod,
+            # math_prod,
+            # numpy_prod,
         ],
         n_range=[10**k for k in range(0, exp_max + 1)],
     )

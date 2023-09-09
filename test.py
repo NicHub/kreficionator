@@ -1,4 +1,28 @@
-exp_max = 4
 
 
-[1] + [i * 2 for i in range(1, 10)] + [i * 10 for i in range(2, 11)]
+
+
+
+
+
+
+
+
+
+
+
+def list_comprehension_prod(lst):
+    ans = (lambda lst, j=1: [j := i * j for i in lst][-1])(lst) if len(lst) else 1
+    return ans
+
+
+lst = [2, 3, 4, 5]
+
+
+def t(lst):
+    ans = [elem * i for i in lst[1:] for elem in [lst[0]]][-1] if len(lst) else 1
+    return ans
+
+
+print(lst)
+print(t(lst))
