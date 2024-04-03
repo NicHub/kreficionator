@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRÉFICIONATOR</title>
+    <script src="kreficionator.js"></script>
+    <style>
+        body {
+            display: block;
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 1em;
+        }
+
+        body * {
+            font-family: monospace;
+            font-size: 14pt;
+        }
+
+        textarea#phonemes {
+            display: block;
+            margin: 0 0 1em;
+            width: 100%;
+            max-width: 100%;
+            resize: vertical;
+            background-color: inherit;
+        }
+
+        ol {
+            margin-left: 2em;
+        }
+
+        p {
+            max-width: 100%;
+            margin: 0 0 1em;
+            padding: 0;
+        }
+
+        pre {
+            margin: 2em 0;
+        }
+
+        button {
+            padding: 1em;
+        }
+
+        div#results {
+            padding: inherit;
+            margin-top: 1em;
+            max-width: 100%;
+        }
+
+        @media (min-width: 1000px) {
+            div#results {
+                border-radius: 2px;
+                border: 1px solid rgb(161, 161, 161);
+                max-height: 30em;
+                min-height: 10em;
+                padding: inherit;
+                overflow: auto;
+            }
+        }
+
+        body.videoinverse,
+        body.videoinverse textarea,
+        body.videoinverse button {
+            background-color: #1E1E1E;
+        }
+
+        body.videoinverse * {
+            color: rgb(156, 217, 63);
+        }
+    </style>
+</head>
+
+<body class="no-videoinverse">
+    <h1>KRÉFICIONATOR</h1>
+
+    <pre>
+La faute de l’orthographe
+Arnaud Hoedt & Jérôme Piron
+TEDxRennes
+<a href="https://youtu.be/5YO7Vg1ByA8?t=242" target="_blank">https://youtu.be/5YO7Vg1ByA8?t=242</a>
+</pre>
+
+
+    <label for="phonemes"><strong>PHONÈMES</strong></label>
+    <textarea id="phonemes" rows="10">k,c,ch;
+r;ai,è;
+f,ff,ph;
+i,y;
+ss,c,t,sc;
+i;
+on,ond,ont;</textarea>
+
+    <button onclick="main()" autofocus>KRÉFICIONER</button>
+
+    <div id="results"></div>
+
+</body>
+
+</html>

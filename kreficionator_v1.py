@@ -10,6 +10,6 @@ for k in ["k", "c", "ch"]:
                                 result = k + r + ai + f + y + s + i + on
                                 if any(elem in result for elem in ["ffy", "fy", "tiond", "tiont"]):
                                     break
-                                result.replace("èff", "eff")
+                                result = result.replace("èff", "eff")
                                 counter += 1
                                 print(f"{counter:4d}. {result}")

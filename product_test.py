@@ -8,6 +8,8 @@ https://en.wikipedia.org/wiki/Empty_product
 
 https://www.geeksforgeeks.org/python-multiply-numbers-list-3-different-ways/
 
+python3 -m pip install perfplot
+
 """
 
 import math
@@ -95,12 +97,20 @@ def while_loop_prod(lst):
 
 
 def list_comprehension_prod_1(lst):
-    ans = (lambda lst, j=1: [j := i * j for i in lst][-1])(lst) if len(lst) else 1
+    ans = (
+        (lambda lst, j=1: [j := i * j for i in lst][-1])(lst)  # noqa: F841
+        if len(lst)
+        else 1
+    )
     return ans
 
 
 def list_comprehension_prod_2(lst):
-    ans = [(j := (i * j) if c else i) for c, i in enumerate(lst)][-1] if len(lst) else 1
+    ans = (
+        [(j := (i * j) if c else i) for c, i in enumerate(lst)][-1]  # noqa: F821, F841
+        if len(lst)
+        else 1
+    )
     return ans
 
 
@@ -141,3 +151,7 @@ if __name__ == "__main__":
         logy=True,
     )
     # pb.show()
+
+    lst = [1, 2, 5, 10]
+    ans = list_comprehension_prod_2(lst)
+    type(ans)

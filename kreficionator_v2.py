@@ -22,7 +22,7 @@ def apply_french_rules(word):
     if any(elem in word for elem in ["ffy", "fy", "tiond", "tiont"]):
         word = None
     else:
-        word.replace("èff", "eff")
+        word = word.replace("èff", "eff")
     return word
 
 
@@ -37,9 +37,9 @@ def generate_combinations(phonemes):
 
 def print_results(combinations, phonemes):
     """___"""
-    count = lambda l: l[0] if len(l) == 1 else l[0] * count(l[1:])
     for id, combination in enumerate(combinations):
         print(f"{id+1:4d}. {combination}")
+    count = lambda _l: _l[0] if len(_l) == 1 else _l[0] * count(_l[1:])  # noqa: E731
     print(
         "Nombre de combinaisons avant application des règles de français :"
         f" {count([len(row) for row in phonemes])}"
