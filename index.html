@@ -47,16 +47,25 @@
             padding: 1em;
         }
 
+        button:hover {
+            cursor: pointer;
+        }
+
+        div#results,
+        textarea#phonemes,
+        button {
+            border-radius: 5px;
+            border: 1px solid rgb(112, 112, 112);
+        }
+
         div#results {
-            padding: inherit;
             margin-top: 1em;
             max-width: 100%;
+            padding: inherit;
         }
 
         @media (min-width: 1000px) {
             div#results {
-                border-radius: 2px;
-                border: 1px solid rgb(161, 161, 161);
                 max-height: 30em;
                 min-height: 10em;
                 padding: inherit;
@@ -71,7 +80,7 @@
         }
 
         body.videoinverse * {
-            color: rgb(156, 217, 63);
+            color: #D2BB85;
         }
     </style>
 </head>
@@ -83,10 +92,11 @@
 La faute de l’orthographe
 Arnaud Hoedt & Jérôme Piron
 TEDxRennes
-<a href="https://youtu.be/5YO7Vg1ByA8?t=242" target="_blank">https://youtu.be/5YO7Vg1ByA8?t=242</a>
-<a href="https://nichub.github.io/kreficionator" target="_blank">https://nichub.github.io/kreficionator</a>
-</pre>
 
+• <a href="https://youtu.be/5YO7Vg1ByA8?t=242" target="_blank">https://youtu.be/5YO7Vg1ByA8?t=242</a>
+• <a href="https://nichub.github.io/kreficionator" target="_blank">https://nichub.github.io/kreficionator</a>
+• <a href="https://github.com/NicHub/kreficionator" target="_blank">https://github.com/NicHub/kreficionator</a>
+</pre>
 
     <label for="phonemes"><strong>PHONÈMES</strong></label>
     <textarea id="phonemes" rows="10">k,c,ch;
