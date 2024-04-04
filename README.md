@@ -1,5 +1,5 @@
 # KRÉFICIONATOR
 
--   https://youtu.be/5YO7Vg1ByA8?t=242
--   https://nichub.github.io/kreficionator
--   https://github.com/NicHub/kreficionator
+https://nichub.github.io/kreficionator
+
+This project is released into the public domain under The Unlicense.

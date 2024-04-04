@@ -38,7 +38,7 @@ function displayResults(combinations) {
     resultsDiv.innerHTML = ans;
 }
 
-function main() {
+function kreficioner() {
     const phonemes = document
         .getElementById("phonemes")
         .value.split(";")
