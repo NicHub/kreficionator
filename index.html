@@ -126,18 +126,20 @@
     </div>
 
     <div class="lisez-moi">
-        <p>Le kréficionator est une invention d’Arnaud Hoedt & Jérôme Piron (et de Kévin, leur régisseur).
-            Il permet de générer toutes les variantes orthographiques d’un mot.
+        <p>Le kréficionator est une invention d’Arnaud Hoedt, de Jérôme Piron et de Kévin, leur régisseur.<br/>
+            Il permet de générer toutes les variantes orthographiques d’un mot.<br/>
             Pour cela, l’utilisateur décompose le mot en ses phonèmes (unités de son), puis, pour chaque phonème, il
-            indique les graphèmes (variantes orthographiques) souhaités.
+            indique les graphèmes (variantes orthographiques) souhaités.<br/>
             Le programme génère ensuite toutes les permutations de graphèmes possibles tout en préservant l’ordre des
             phonèmes.
+<!--
             En d’autres termes, il calcule le
             <a href="https://fr.wikipedia.org/wiki/Produit_cart%C3%A9sien" target="_blank">produit cartésien</a>
             des graphèmes possibles pour chaque phonème.
+             -->
         </p>
 
-        <p>Le programme supprime les mots qui contiennent les graphèmes suivants : "ffy", "fy", "tiond", "tiont".
+        <p>Le programme supprime les mots qui contiennent les graphèmes suivants : “ffy”, “fy”, “tiond”, “tiont”.
             J’ai repris cette particularité pour trouver les mêmes résultats que ceux présentés par les auteurs dans
             leur conférence.
             Si on enlève ce filtre, le nombre de combinaisons possibles de “kréficion” passe de 240 à 432.
